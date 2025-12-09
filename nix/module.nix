@@ -91,7 +91,7 @@ in
               The directory where agenix secrets are stored
 
               If set to non-null, the age secrets will be scaffolded
-              automatically. 
+              automatically.
             '';
           };
 
@@ -157,7 +157,6 @@ in
                 url = lib.mkOption {
                   type = types.str;
                   default = "https://github.com/${config.output.user}/${config.output.repo}";
-                  readOnly = true;
                 };
 
                 output.user = lib.mkOption {
