@@ -74,6 +74,7 @@ let
     ephemeral = true;
     noDefaultLabels = true;
     extraPackages = extraPackages ++ config.services.github-nix-ci.runnerSettings.extraPackages;
+    serviceOverrides = config.services.github-nix-ci.runnerSettings.serviceOverrides;
   } // lib.optionalAttrs isLinux { inherit user group; };
   user = "github-runner";
   group = "github-runner";
@@ -102,6 +103,19 @@ in
               description = ''
                 Extra packages to be installed on all runners
               '';
+            };
+
+            serviceOverrides = lib.mkOption {
+              type = lib.types.attrs;
+              description = ''
+                Modify the systemd service. Can be used to, e.g., adjust the sandboxing options.
+                See {manpage}`systemd.exec(5)` for more options.
+              '';
+              example = {
+                ProtectHome = false;
+                RestrictAddressFamilies = [ "AF_PACKET" ];
+              };
+              default = { };
             };
           };
 
