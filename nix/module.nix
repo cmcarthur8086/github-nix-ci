@@ -38,7 +38,8 @@ let
   # - Nix systems it can build for.
   #
   # In workflow file, we expect the user to use the Nix system as label usually.
-  extraLabels = [ host ] ++ supportedSystems;
+  extraLabels = [ host ] ++ supportedSystems
+    ++ (if host != "moomoo" then [ "moomoo" ] else [ ]);
 
   # Packages that will be made available to all runners.
   extraPackages =
